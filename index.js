@@ -16,15 +16,18 @@ const Exception = function (message) {
 };
 
 const startDayOfEthiopian = function (year) {
-  const newYearDay = (year / 100.0) - (year / 400.0) - 4;
+  const newYearDay = (3 * year / 400.0) - 4;
   // if the prev ethiopian year is a leap year, new-year occrus on 12th
   return ((year - 1) % 4 === 3) ? newYearDay + 1 : newYearDay;
 };
 
 module.exports.toGregorian = function (year, month, date) {
+
+  // Allow argument to be array year, month, day, or 3 separate params
+  const inputs = (year.constructor === Array) ? year : [year, month, date];
+
   // prevent incorect input
-  const inputs = [year, month, date];
-  if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined)) {
+  if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined) || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
   }
 
@@ -86,8 +89,11 @@ module.exports.toGregorian = function (year, month, date) {
 };
 
 module.exports.toEthiopian = function (year, month, date) {
+
+  // Allow argument to be array year, month, day, or 3 separate params
+  const inputs = (year.constructor === Array) ? year : [year, month, date];
+
   // prevent incorect input
-  const inputs = [year, month, date];
   if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined)) {
     throw new Exception("Malformed input can't be converted.");
   }
