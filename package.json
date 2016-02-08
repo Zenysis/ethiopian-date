@@ -2,7 +2,7 @@
   "name": "ethiopian-date",
   "version": "0.0.1",
   "description": "A date converter from Ethiopian calendar to Gregorian calendar and vice-versa.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha --reporter spec test",
     "lint": "eslint .",
