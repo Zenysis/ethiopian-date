@@ -1,7 +1,7 @@
 'use strict';
 
 Array.prototype.contains = function (obj) {
-  var i = this.length;
+  let i = this.length;
   while (i--) {
     if (this[i] === obj) {
       return true;
@@ -16,13 +16,12 @@ const Exception = function (message) {
 };
 
 const startDayOfEthiopian = function (year) {
-  const newYearDay = ( year / 100.0) - ( year / 400.0) - 4;
+  const newYearDay = (year / 100.0) - (year / 400.0) - 4;
   // if the prev ethiopian year is a leap year, new-year occrus on 12th
   return ((year - 1) % 4 === 3) ? newYearDay + 1 : newYearDay;
 };
 
 module.exports.toGregorian = function (year, month, date) {
-
   // prevent incorect input
   const inputs = [year, month, date];
   if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined)) {
@@ -30,24 +29,24 @@ module.exports.toGregorian = function (year, month, date) {
   }
 
   // Ethiopian new year in Gregorian calendar
-  var newYearDay = startDayOfEthiopian(year);
+  const newYearDay = startDayOfEthiopian(year);
 
   // September (Ethiopian) sees 7y difference
-  var gregorianYear = year + 7;
+  let gregorianYear = year + 7;
 
   // Number of days in gregorian months
   // starting with September (index 1)
   // Index 0 is reserved for leap years switches.
-  var gregorianMonths = [0.0, 30, 31, 30, 31, 31, 28, 31, 30, 31, 30, 31, 31, 30];
+  let gregorianMonths = [0.0, 30, 31, 30, 31, 31, 28, 31, 30, 31, 30, 31, 31, 30];
 
   // if next gregorian year is leap year, February has 29 days.
-  var nextYear = gregorianYear + 1;
+  const nextYear = gregorianYear + 1;
   if ((nextYear % 4 === 0 && nextYear % 100 !== 0) || nextYear % 400 === 0) {
     gregorianMonths[6] = 29;
   }
 
   // calculate number of days up to that date
-  var until = ((month - 1) * 30.0) + date;
+  let until = ((month - 1) * 30.0) + date;
   if (until <= 37 && year <= 1575) { // mysterious rule
     until += 28;
     gregorianMonths[0] = 31;
@@ -61,9 +60,9 @@ module.exports.toGregorian = function (year, month, date) {
   }
 
   // calculate month and date incremently
-  var m = 0;
-  var gregorianDate;
-  for (var i = 0; i < gregorianMonths.length; i++) {
+  let m = 0;
+  let gregorianDate;
+  for (let i = 0; i < gregorianMonths.length; i++) {
     if (until <= gregorianMonths[i]) {
       m = i;
       gregorianDate = until;
@@ -80,16 +79,15 @@ module.exports.toGregorian = function (year, month, date) {
   }
 
   // Gregorian months ordered according to Ethiopian
-  var order = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const order = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   gregorianMonths = order[m];
   gregorianDate = Math.floor(gregorianDate);
   return [gregorianYear, gregorianMonths, gregorianDate];
 };
 
 module.exports.toEthiopian = function (year, month, date) {
-
   // prevent incorect input
-  var inputs = [year, month, date];
+  const inputs = [year, month, date];
   if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined)) {
     throw new Exception("Malformed input can't be converted.");
   }
@@ -102,12 +100,12 @@ module.exports.toEthiopian = function (year, month, date) {
   // Number of days in gregorian months
   // starting with January (index 1)
   // Index 0 is reserved for leap years switches.
-  var gregorianMonths = [0.0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  const gregorianMonths = [0.0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
   // Number of days in ethiopian months
   // starting with January (index 1)
   // Index 0 is reserved for leap years switches.
-  var ethiopianMonths = [0.0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 5, 30, 30, 30, 30];
+  const ethiopianMonths = [0.0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 5, 30, 30, 30, 30];
 
   // if gregorian leap year, February has 29 days.
   if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
@@ -115,7 +113,7 @@ module.exports.toEthiopian = function (year, month, date) {
   }
 
   // September sees 8y difference
-  var ethiopianYear = year - 8;
+  let ethiopianYear = year - 8;
 
   // if ethiopian leap year pagumain has 6 days
 
@@ -124,17 +122,17 @@ module.exports.toEthiopian = function (year, month, date) {
   }
 
   // Ethiopian new year in Gregorian calendar
-  var newYearDay = startDayOfEthiopian(year - 8);
+  const newYearDay = startDayOfEthiopian(year - 8);
 
   // calculate number of days up to that date
-  var until = 0;
-  for (var i = 1; i < month; i++) {
+  let until = 0;
+  for (let i = 1; i < month; i++) {
     until += gregorianMonths[i];
   }
   until += date;
 
   // update tahissas (december) to match january 1st
-  var tahissas = (ethiopianYear % 4) === 0 ? 26 : 25;
+  let tahissas = (ethiopianYear % 4) === 0 ? 26 : 25;
 
   // take into account the 1582 change
   if (year < 1582) {
@@ -149,8 +147,8 @@ module.exports.toEthiopian = function (year, month, date) {
   }
 
   // calculate month and date incremently
-  var m;
-  var ethiopianDate;
+  let m;
+  let ethiopianDate;
   for (m = 1; m < ethiopianMonths.length; m++) {
     if (until <= ethiopianMonths[m]) {
       ethiopianDate = (m === 1 || ethiopianMonths[m] === 0) ? until + (30 - tahissas) : until;
