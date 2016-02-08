@@ -1,5 +1,15 @@
 'use strict';
 
+Array.prototype.contains = function(obj) {
+    var i = this.length;
+    while (i--) {
+        if (this[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+}
+
 const Exception = function(message) {
    this.message = message;
    this.name = "Exception";
@@ -15,16 +25,12 @@ const startDayOfEthiopian = function(year) {
 };
 
 module.exports.toGregorian = function(year, month, date){
-      /* Gregorian date object representation of provided Ethiopian date
-      Params:
-      * year: an int
-      * month: an int
-      * date: an int */
 
       // prevent incorect input
-      var inputs = [year, month, date];
-      if (inputs.length !== 3) //TODO Check for 0 or undefined
-          throw new Exception("Malformed input can't be converted.");
+      const inputs = [year, month, date];
+      if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined)){
+        throw new Exception("Malformed input can't be converted.");
+      }
 
       // Ethiopian new year in Gregorian calendar
       var newYearDay = startDayOfEthiopian(year);
@@ -44,7 +50,7 @@ module.exports.toGregorian = function(year, month, date){
       }
 
       // calculate number of days up to that date
-      var until = ((month - 1) * 30) + date;
+      var until = ((month - 1) * 30.0) + date;
       if (until <= 37 && year <= 1575){ // mysterious rule
         until += 28;
         gregorianMonths[0] = 31;
@@ -79,24 +85,17 @@ module.exports.toGregorian = function(year, month, date){
       // Gregorian months ordered according to Ethiopian
       var order = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];
       gregorianMonths = order[m];
-      console.log(gregorianYear,gregorianMonths,gregorianDate);
-      // return datetime.date(gregorian_year, gregorian_month, gregorian_date)
+      gregorianDate = Math.floor(gregorianDate);
+      return [gregorianYear,gregorianMonths,gregorianDate];
     }
 
 module.exports.toEthiopian = function(year, month, date) {
-          /* Ethiopian date object representation of provided Gregorian date
-          Params:
-          * year: an int
-          * month: an int
-          * date: an int */
 
           // prevent incorect input
           var inputs = [year, month, date];
-          // if 0 in inputs or [data.__class__ for data in inputs].count(int) != 3:
-          if (inputs.length !== 3){
+          if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined)) {
             throw new Exception("Malformed input can't be converted.");
-          } //TODO Check for 0 or undefined
-
+          }
 
           // date between 5 and 14 of May 1582 are invalid
           if (month == 10 && date >= 5 && date <= 14 && year == 1582){
@@ -122,10 +121,9 @@ module.exports.toEthiopian = function(year, month, date) {
           var ethiopianYear = year - 8;
 
           // if ethiopian leap year pagumain has 6 days
+
           if (ethiopianYear % 4 == 3){
             ethiopianMonths[10] = 6;
-          } else{
-            ethiopianMonths[10] = 5;
           }
 
           // Ethiopian new year in Gregorian calendar
@@ -138,13 +136,8 @@ module.exports.toEthiopian = function(year, month, date) {
           }
           until += date;
 
-          var tahissas;
           // update tahissas (december) to match january 1st
-          if (ethiopianYear % 4 == 0){
-            tahissas = 26;
-          } else{
-            tahissas = 25;
-          }
+          var tahissas = (ethiopianYear % 4) == 0 ? 26 : 25;
 
           // take into account the 1582 change
           if (year < 1582){
@@ -163,11 +156,7 @@ module.exports.toEthiopian = function(year, month, date) {
           var ethiopianDate;
           for (m = 1; m < ethiopianMonths.length; m++){
             if (until <= ethiopianMonths[m]){
-              if (m == 1 || ethiopianMonths[m] == 0){
-                ethiopianDate = until + (30 - tahissas);
-              } else {
-                ethiopianDate = until;
-              }
+              ethiopianDate = (m == 1 || ethiopianMonths[m] == 0) ? until + (30 - tahissas) : until;
               break;
             }
             else {
@@ -183,6 +172,6 @@ module.exports.toEthiopian = function(year, month, date) {
           // Ethiopian months ordered according to Gregorian
           var order = [0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4];
           var ethiopianMonth = order[m];
-          console.log(ethiopianYear,ethiopianMonth,ethiopianDate);
-          // return datetime.date(ethiopian_year, ethiopian_month, ethiopian_date)
+          ethiopianDate = Math.floor(ethiopianDate);
+          return [ethiopianYear,ethiopianMonth,ethiopianDate];
 }
