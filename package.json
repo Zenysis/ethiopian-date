@@ -1,0 +1,26 @@
+{
+  "name": "ethiopian-date",
+  "version": "0.0.1",
+  "description": "A date converter from Ethiopian calendar to Gregorian calendar and vice-versa.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mldangelo/ethiopian-date.git"
+  },
+  "keywords": [
+    "Ethiopian",
+    "Calendar",
+    "Gregorian",
+    "Date",
+    "Conversion"
+  ],
+  "author": "mldangelo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mldangelo/ethiopian-date/issues"
+  },
+  "homepage": "https://github.com/mldangelo/ethiopian-date#readme"
+}
