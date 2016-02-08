@@ -165,7 +165,7 @@ module.exports.toEthiopian = function (year, month, date) {
   }
 
   // if m > 4, we're already on next Ethiopian year
-  if (m > 10) {
+  if (m > 4) {
     ethiopianYear += 1;
   }
 
