@@ -2,10 +2,11 @@
   "name": "ethiopian-date",
   "version": "0.0.1",
   "description": "A date converter from Ethiopian calendar to Gregorian calendar and vice-versa.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha --reporter spec test",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "babel index.js -d dist"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,8 @@
   "homepage": "https://github.com/mldangelo/ethiopian-date#readme",
   "devDependencies": {
     "assert": "^1.3.0",
+    "babel-cli": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0",
     "mocha": "^2.4.5"
   }
 }
