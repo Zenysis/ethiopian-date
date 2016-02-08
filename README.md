@@ -13,14 +13,30 @@ It is a port from [@rgaudin](https://github.com/rgaudin)'s [ethiopian_date](http
 `npm install` this package:
 
 ```bash
-$ npm install ethiopian-date
+$ npm install ethiopian-date --save
 ```
+
+## Usage
 
 Include it in your project:
 
 ```js
 var ethiopianDate = require('ethiopian-date');
 ```
+ethiopian-date currently supports two function calls.
+
+- To convert Gregorian dates to Ethiopian, call:
+```js
+ethiopianDate.toEthiopian(YYYY, MM, DD)
+```
+with return type array [YYYY, MM, DD]
+
+- To convert Ethiopian dates to Gregorian, call:
+```js
+ethiopianDate.toGregorian(YYYY, MM, DD)
+```
+with return type array [YYYY, MM, DD]
+
 
 Resources
 ---------
