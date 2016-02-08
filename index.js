@@ -1,15 +1,5 @@
 'use strict';
 
-Array.prototype.contains = function (obj) {
-  let i = this.length;
-  while (i--) {
-    if (this[i] === obj) {
-      return true;
-    }
-  }
-  return false;
-};
-
 const Exception = function (message) {
   this.message = message;
   this.name = 'Exception';
@@ -21,13 +11,14 @@ const startDayOfEthiopian = function (year) {
   return ((year - 1) % 4 === 3) ? newYearDay + 1 : newYearDay;
 };
 
-module.exports.toGregorian = function (year, month, date) {
+export const toGregorian = function (year, month, date) {
 
   // Allow argument to be array year, month, day, or 3 separate params
   const inputs = (year.constructor === Array) ? year : [year, month, date];
 
   // prevent incorect input
-  if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined) || inputs.length !== 3) {
+
+  if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 || inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
   }
 
@@ -88,13 +79,13 @@ module.exports.toGregorian = function (year, month, date) {
   return [gregorianYear, gregorianMonths, gregorianDate];
 };
 
-module.exports.toEthiopian = function (year, month, date) {
+export const toEthiopian = function (year, month, date) {
 
   // Allow argument to be array year, month, day, or 3 separate params
   const inputs = (year.constructor === Array) ? year : [year, month, date];
 
   // prevent incorect input
-  if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined)) {
+  if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 || inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
   }
 

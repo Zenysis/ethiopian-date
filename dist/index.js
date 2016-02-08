@@ -1,30 +1,27 @@
 'use strict';
 
-Array.prototype.contains = function (obj) {
-  var i = this.length;
-  while (i--) {
-    if (this[i] === obj) {
-      return true;
-    }
-  }
-  return false;
-};
-
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var Exception = function Exception(message) {
   this.message = message;
   this.name = 'Exception';
 };
 
 var startDayOfEthiopian = function startDayOfEthiopian(year) {
-  var newYearDay = year / 100.0 - year / 400.0 - 4;
+  var newYearDay = 3 * year / 400.0 - 4;
   // if the prev ethiopian year is a leap year, new-year occrus on 12th
   return (year - 1) % 4 === 3 ? newYearDay + 1 : newYearDay;
 };
 
-module.exports.toGregorian = function (year, month, date) {
+var toGregorian = exports.toGregorian = function toGregorian(year, month, date) {
+
+  // Allow argument to be array year, month, day, or 3 separate params
+  var inputs = year.constructor === Array ? year : [year, month, date];
+
   // prevent incorect input
-  var inputs = [year, month, date];
-  if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined)) {
+
+  if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 || inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
   }
 
@@ -86,10 +83,13 @@ module.exports.toGregorian = function (year, month, date) {
   return [gregorianYear, gregorianMonths, gregorianDate];
 };
 
-module.exports.toEthiopian = function (year, month, date) {
+var toEthiopian = exports.toEthiopian = function toEthiopian(year, month, date) {
+
+  // Allow argument to be array year, month, day, or 3 separate params
+  var inputs = year.constructor === Array ? year : [year, month, date];
+
   // prevent incorect input
-  var inputs = [year, month, date];
-  if (inputs.contains(0) || inputs.contains(null) || inputs.contains(undefined)) {
+  if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 || inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
   }
 
@@ -160,7 +160,7 @@ module.exports.toEthiopian = function (year, month, date) {
   }
 
   // if m > 4, we're already on next Ethiopian year
-  if (m > 10) {
+  if (m > 4) {
     ethiopianYear += 1;
   }
 

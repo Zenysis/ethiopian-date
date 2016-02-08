@@ -1,4 +1,4 @@
-const ed = require('./index.js');
+const ed = require('./dist/index.js');
 const assert = require('assert');
 
 describe('Test Gregorian to Ethiopian', function () {

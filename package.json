@@ -4,7 +4,7 @@
   "description": "A date converter from Ethiopian calendar to Gregorian calendar and vice-versa.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha --reporter spec test",
+    "test": "npm build && mocha --reporter spec test",
     "lint": "eslint .",
     "build": "babel index.js -d dist"
   },
