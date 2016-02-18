@@ -22,6 +22,8 @@ export const toGregorian = function (year, month, date) {
     throw new Exception("Malformed input can't be converted.");
   }
 
+  [year, month, date] = inputs;
+
   // Ethiopian new year in Gregorian calendar
   const newYearDay = startDayOfEthiopian(year);
 
@@ -88,6 +90,8 @@ export const toEthiopian = function (year, month, date) {
   if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 || inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
   }
+
+  [year, month, date] = inputs;
 
   // date between 5 and 14 of May 1582 are invalid
   if (month === 10 && date >= 5 && date <= 14 && year === 1582) {
