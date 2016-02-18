@@ -1,1 +1,9 @@
-"extends": "airbnb/base"
+{
+  "extends": "airbnb/base",
+  "plugins": [
+    "mocha"
+  ],
+  "rules": {
+    "mocha/no-exclusive-tests": 2
+  }
+}
