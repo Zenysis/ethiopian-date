@@ -2,3 +2,4 @@ language: node_js
 script:
 - num run lint
 - num run check-dist
+- npm run test

@@ -13,10 +13,9 @@ const startDayOfEthiopian = function (year) {
 
 export const toGregorian = function (dateArray) {
   // Allow argument to be array year, month, day, or 3 separate params
-  const inputs = (dateArray.constructor === Array) ? dateArray : arguments;
+  const inputs = (dateArray.constructor === Array) ? dateArray : [].slice.call(arguments);
 
   // prevent incorect input
-
   if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 ||
       inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
@@ -83,7 +82,7 @@ export const toGregorian = function (dateArray) {
 
 export const toEthiopian = function (dateArray) {
   // Allow argument to be array year, month, day, or 3 separate params
-  const inputs = (dateArray.constructor === Array) ? dateArray : arguments;
+  const inputs = (dateArray.constructor === Array) ? dateArray : [].slice.call(arguments);
 
   // prevent incorect input
   if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 ||

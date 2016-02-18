@@ -19,10 +19,9 @@ var startDayOfEthiopian = function startDayOfEthiopian(year) {
 
 var toGregorian = exports.toGregorian = function toGregorian(dateArray) {
   // Allow argument to be array year, month, day, or 3 separate params
-  var inputs = dateArray.constructor === Array ? dateArray : arguments;
+  var inputs = dateArray.constructor === Array ? dateArray : [].slice.call(arguments);
 
   // prevent incorect input
-
   if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 || inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
   }
@@ -94,7 +93,7 @@ var toGregorian = exports.toGregorian = function toGregorian(dateArray) {
 
 var toEthiopian = exports.toEthiopian = function toEthiopian(dateArray) {
   // Allow argument to be array year, month, day, or 3 separate params
-  var inputs = dateArray.constructor === Array ? dateArray : arguments;
+  var inputs = dateArray.constructor === Array ? dateArray : [].slice.call(arguments);
 
   // prevent incorect input
   if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 || inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
