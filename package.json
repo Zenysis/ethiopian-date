@@ -1,6 +1,6 @@
 {
   "name": "ethiopian-date",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A date converter from Ethiopian calendar to Gregorian calendar and vice-versa.",
   "main": "dist/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mldangelo/ethiopian-date.git"
+    "url": "git+https://github.com/zenysis/ethiopian-date.git"
   },
   "keywords": [
     "Ethiopian",
@@ -19,16 +19,17 @@
     "Date",
     "Conversion"
   ],
-  "author": "mldangelo",
+  "author": "zenysis",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mldangelo/ethiopian-date/issues"
+    "url": "https://github.com/zenysis/ethiopian-date/issues"
   },
-  "homepage": "https://github.com/mldangelo/ethiopian-date#readme",
+  "homepage": "https://github.com/zenysis/ethiopian-date#readme",
   "devDependencies": {
     "assert": "^1.3.0",
     "babel-cli": "^6.5.1",
     "babel-preset-es2015": "^6.5.0",
+    "eslint-plugin-mocha": "^1.1.0",
     "mocha": "^2.4.5"
   }
 }
