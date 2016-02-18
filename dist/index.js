@@ -3,6 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var Exception = function Exception(message) {
   this.message = message;
   this.name = 'Exception';
@@ -26,6 +29,12 @@ var toGregorian = exports.toGregorian = function toGregorian(year, month, date) 
   }
 
   // Ethiopian new year in Gregorian calendar
+
+  var _inputs = _slicedToArray(inputs, 3);
+
+  year = _inputs[0];
+  month = _inputs[1];
+  date = _inputs[2];
   var newYearDay = startDayOfEthiopian(year);
 
   // September (Ethiopian) sees 7y difference
@@ -94,6 +103,12 @@ var toEthiopian = exports.toEthiopian = function toEthiopian(year, month, date) 
   }
 
   // date between 5 and 14 of May 1582 are invalid
+
+  var _inputs2 = _slicedToArray(inputs, 3);
+
+  year = _inputs2[0];
+  month = _inputs2[1];
+  date = _inputs2[2];
   if (month === 10 && date >= 5 && date <= 14 && year === 1582) {
     throw new Exception('Invalid Date between 5-14 May 1582.');
   }
