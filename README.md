@@ -1,6 +1,8 @@
 Ethiopian Date Converter
 ========================
 
+[![Build Status](https://travis-ci.org/Zenysis/ethiopian-date.svg?branch=master)](https://travis-ci.org/Zenysis/ethiopian-date)
+
 Introduction
 ------------
 
