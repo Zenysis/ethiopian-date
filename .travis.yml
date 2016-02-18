@@ -1,6 +1,6 @@
 language: node_js
 node_js: '5.0'
 script:
-- num run lint
-- num run check-dist
+- npm run lint
+- npm run check-dist
 - npm run test
