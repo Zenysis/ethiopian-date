@@ -1,5 +1,8 @@
+/* eslint-disable func-names, prefer-arrow-callback */
+
 const ed = require('./dist/index.js');
 const assert = require('assert');
+const { describe, it } = require('global-mocha');
 
 describe('Test Gregorian to Ethiopian', function () {
   it('values should be equal', function () {

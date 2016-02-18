@@ -11,18 +11,18 @@ const startDayOfEthiopian = function (year) {
   return ((year - 1) % 4 === 3) ? newYearDay + 1 : newYearDay;
 };
 
-export const toGregorian = function (year, month, date) {
-
+export const toGregorian = function (dateArray) {
   // Allow argument to be array year, month, day, or 3 separate params
-  const inputs = (year.constructor === Array) ? year : [year, month, date];
+  const inputs = (dateArray.constructor === Array) ? dateArray : arguments;
 
   // prevent incorect input
 
-  if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 || inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
+  if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 ||
+      inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
   }
 
-  [year, month, date] = inputs;
+  const [year, month, date] = inputs;
 
   // Ethiopian new year in Gregorian calendar
   const newYearDay = startDayOfEthiopian(year);
@@ -81,17 +81,17 @@ export const toGregorian = function (year, month, date) {
   return [gregorianYear, gregorianMonths, gregorianDate];
 };
 
-export const toEthiopian = function (year, month, date) {
-
+export const toEthiopian = function (dateArray) {
   // Allow argument to be array year, month, day, or 3 separate params
-  const inputs = (year.constructor === Array) ? year : [year, month, date];
+  const inputs = (dateArray.constructor === Array) ? dateArray : arguments;
 
   // prevent incorect input
-  if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 || inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
+  if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 ||
+      inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
   }
 
-  [year, month, date] = inputs;
+  const [year, month, date] = inputs;
 
   // date between 5 and 14 of May 1582 are invalid
   if (month === 10 && date >= 5 && date <= 14 && year === 1582) {
