@@ -17,10 +17,9 @@ var startDayOfEthiopian = function startDayOfEthiopian(year) {
   return (year - 1) % 4 === 3 ? newYearDay + 1 : newYearDay;
 };
 
-var toGregorian = exports.toGregorian = function toGregorian(year, month, date) {
-
+var toGregorian = exports.toGregorian = function toGregorian(dateArray) {
   // Allow argument to be array year, month, day, or 3 separate params
-  var inputs = year.constructor === Array ? year : [year, month, date];
+  var inputs = dateArray.constructor === Array ? dateArray : arguments;
 
   // prevent incorect input
 
@@ -28,13 +27,14 @@ var toGregorian = exports.toGregorian = function toGregorian(year, month, date) 
     throw new Exception("Malformed input can't be converted.");
   }
 
-  // Ethiopian new year in Gregorian calendar
-
   var _inputs = _slicedToArray(inputs, 3);
 
-  year = _inputs[0];
-  month = _inputs[1];
-  date = _inputs[2];
+  var year = _inputs[0];
+  var month = _inputs[1];
+  var date = _inputs[2];
+
+  // Ethiopian new year in Gregorian calendar
+
   var newYearDay = startDayOfEthiopian(year);
 
   // September (Ethiopian) sees 7y difference
@@ -92,23 +92,23 @@ var toGregorian = exports.toGregorian = function toGregorian(year, month, date) 
   return [gregorianYear, gregorianMonths, gregorianDate];
 };
 
-var toEthiopian = exports.toEthiopian = function toEthiopian(year, month, date) {
-
+var toEthiopian = exports.toEthiopian = function toEthiopian(dateArray) {
   // Allow argument to be array year, month, day, or 3 separate params
-  var inputs = year.constructor === Array ? year : [year, month, date];
+  var inputs = dateArray.constructor === Array ? dateArray : arguments;
 
   // prevent incorect input
   if (inputs.indexOf(0) !== -1 || inputs.indexOf(null) !== -1 || inputs.indexOf(undefined) !== -1 || inputs.length !== 3) {
     throw new Exception("Malformed input can't be converted.");
   }
 
-  // date between 5 and 14 of May 1582 are invalid
-
   var _inputs2 = _slicedToArray(inputs, 3);
 
-  year = _inputs2[0];
-  month = _inputs2[1];
-  date = _inputs2[2];
+  var year = _inputs2[0];
+  var month = _inputs2[1];
+  var date = _inputs2[2];
+
+  // date between 5 and 14 of May 1582 are invalid
+
   if (month === 10 && date >= 5 && date <= 14 && year === 1582) {
     throw new Exception('Invalid Date between 5-14 May 1582.');
   }
