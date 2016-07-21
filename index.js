@@ -1,5 +1,3 @@
-'use strict';
-
 const Exception = function (message) {
   this.message = message;
   this.name = 'Exception';
