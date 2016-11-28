@@ -40,6 +40,7 @@ var toGregorian = exports.toGregorian = function toGregorian(dateArray) {
   // Number of days in gregorian months
   // starting with September (index 1)
   // Index 0 is reserved for leap years switches.
+  // Index 4 is December, the final month of the year.
   var gregorianMonths = [0.0, 30, 31, 30, 31, 31, 28, 31, 30, 31, 30, 31, 31, 30];
 
   // if next gregorian year is leap year, February has 29 days.
@@ -117,6 +118,7 @@ var toEthiopian = exports.toEthiopian = function toEthiopian(dateArray) {
   // Number of days in ethiopian months
   // starting with January (index 1)
   // Index 0 is reserved for leap years switches.
+  // Index 10 is month 13, the final month of the year
   var ethiopianMonths = [0.0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 5, 30, 30, 30, 30];
 
   // if gregorian leap year, February has 29 days.
