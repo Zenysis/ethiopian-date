@@ -1,6 +1,6 @@
 {
   "name": "ethiopian-date",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A date converter from Ethiopian calendar to Gregorian calendar and vice-versa.",
   "main": "dist/index.js",
   "scripts": {
