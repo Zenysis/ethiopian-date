@@ -1,4 +1,4 @@
-/* eslint-disable func-names, prefer-arrow-callback */
+/* eslint-disable func-names, no-var, prefer-arrow-callback, vars-on-top */
 
 const ed = require('./dist/index.js');
 const assert = require('assert');
@@ -63,14 +63,14 @@ describe('Test Gregorian to Ethiopian to Gregorian', function () {
 });
 
 describe('Test Gregorian to Ethiopian to Gregorain for four years', function () {
-  it('values should be equal', function() {
+  it('values should be equal', function () {
     var numDays = 365 * 3 + 366;
     for (var i = 1; i <= numDays; i++) {
       var date = new Date(2000, 0, i);
       var dateArray = [
         date.getUTCFullYear(),
         date.getUTCMonth() + 1,
-        date.getUTCDate()
+        date.getUTCDate(),
       ];
       assert.deepEqual(dateArray, ed.toGregorian(ed.toEthiopian(dateArray)));
     }
