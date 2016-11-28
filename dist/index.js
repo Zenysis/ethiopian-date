@@ -181,3 +181,4 @@ var toEthiopian = exports.toEthiopian = function toEthiopian(dateArray) {
   var ethiopianMonth = order[m];
   return [ethiopianYear, ethiopianMonth, ethiopianDate];
 };
+
