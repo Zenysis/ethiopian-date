@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run build && mocha --reporter spec test",
     "lint": "eslint .",
-    "build": "babel index.js -d dist",
+    "build": "babel index.js -d dist && sed -i '' '1,2d' dist/index.js",
     "check-dist": "npm run build && test `git diff --name-only dist | wc -l` -eq 0"
   },
   "repository": {

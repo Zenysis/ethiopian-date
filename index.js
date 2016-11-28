@@ -4,7 +4,7 @@ const Exception = function (message) {
 };
 
 const startDayOfEthiopian = function (year) {
-  const newYearDay = (3 * year / 400.0) - 4;
+  const newYearDay = Math.floor(year / 100) - Math.floor(year / 400) - 4;
   // if the prev ethiopian year is a leap year, new-year occrus on 12th
   return ((year - 1) % 4 === 3) ? newYearDay + 1 : newYearDay;
 };
@@ -30,6 +30,7 @@ export const toGregorian = function (dateArray) {
   // Number of days in gregorian months
   // starting with September (index 1)
   // Index 0 is reserved for leap years switches.
+  // Index 4 is December, the final month of the year.
   let gregorianMonths = [0.0, 30, 31, 30, 31, 31, 28, 31, 30, 31, 30, 31, 31, 30];
 
   // if next gregorian year is leap year, February has 29 days.
@@ -74,7 +75,6 @@ export const toGregorian = function (dateArray) {
   // Gregorian months ordered according to Ethiopian
   const order = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   gregorianMonths = order[m];
-  gregorianDate = Math.floor(gregorianDate);
   return [gregorianYear, gregorianMonths, gregorianDate];
 };
 
@@ -103,6 +103,7 @@ export const toEthiopian = function (dateArray) {
   // Number of days in ethiopian months
   // starting with January (index 1)
   // Index 0 is reserved for leap years switches.
+  // Index 10 is month 13, the final month of the year
   const ethiopianMonths = [0.0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 5, 30, 30, 30, 30];
 
   // if gregorian leap year, February has 29 days.
@@ -114,7 +115,6 @@ export const toEthiopian = function (dateArray) {
   let ethiopianYear = year - 8;
 
   // if ethiopian leap year pagumain has 6 days
-
   if (ethiopianYear % 4 === 3) {
     ethiopianMonths[10] = 6;
   }
@@ -156,14 +156,13 @@ export const toEthiopian = function (dateArray) {
     }
   }
 
-  // if m > 4, we're already on next Ethiopian year
-  if (m > 4) {
+  // if m > 10, we're already on next Ethiopian year
+  if (m > 10) {
     ethiopianYear += 1;
   }
 
   // Ethiopian months ordered according to Gregorian
   const order = [0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4];
   const ethiopianMonth = order[m];
-  ethiopianDate = Math.floor(ethiopianDate);
   return [ethiopianYear, ethiopianMonth, ethiopianDate];
 };

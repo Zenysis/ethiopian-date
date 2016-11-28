@@ -1,5 +1,3 @@
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -12,7 +10,7 @@ var Exception = function Exception(message) {
 };
 
 var startDayOfEthiopian = function startDayOfEthiopian(year) {
-  var newYearDay = 3 * year / 400.0 - 4;
+  var newYearDay = Math.floor(year / 100) - Math.floor(year / 400) - 4;
   // if the prev ethiopian year is a leap year, new-year occrus on 12th
   return (year - 1) % 4 === 3 ? newYearDay + 1 : newYearDay;
 };
@@ -26,13 +24,13 @@ var toGregorian = exports.toGregorian = function toGregorian(dateArray) {
     throw new Exception("Malformed input can't be converted.");
   }
 
-  var _inputs = _slicedToArray(inputs, 3);
-
-  var year = _inputs[0];
-  var month = _inputs[1];
-  var date = _inputs[2];
+  var _inputs = _slicedToArray(inputs, 3),
+      year = _inputs[0],
+      month = _inputs[1],
+      date = _inputs[2];
 
   // Ethiopian new year in Gregorian calendar
+
 
   var newYearDay = startDayOfEthiopian(year);
 
@@ -67,7 +65,7 @@ var toGregorian = exports.toGregorian = function toGregorian(dateArray) {
 
   // calculate month and date incremently
   var m = 0;
-  var gregorianDate = undefined;
+  var gregorianDate = void 0;
   for (var i = 0; i < gregorianMonths.length; i++) {
     if (until <= gregorianMonths[i]) {
       m = i;
@@ -87,7 +85,6 @@ var toGregorian = exports.toGregorian = function toGregorian(dateArray) {
   // Gregorian months ordered according to Ethiopian
   var order = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   gregorianMonths = order[m];
-  gregorianDate = Math.floor(gregorianDate);
   return [gregorianYear, gregorianMonths, gregorianDate];
 };
 
@@ -100,13 +97,13 @@ var toEthiopian = exports.toEthiopian = function toEthiopian(dateArray) {
     throw new Exception("Malformed input can't be converted.");
   }
 
-  var _inputs2 = _slicedToArray(inputs, 3);
-
-  var year = _inputs2[0];
-  var month = _inputs2[1];
-  var date = _inputs2[2];
+  var _inputs2 = _slicedToArray(inputs, 3),
+      year = _inputs2[0],
+      month = _inputs2[1],
+      date = _inputs2[2];
 
   // date between 5 and 14 of May 1582 are invalid
+
 
   if (month === 10 && date >= 5 && date <= 14 && year === 1582) {
     throw new Exception('Invalid Date between 5-14 May 1582.');
@@ -131,7 +128,6 @@ var toEthiopian = exports.toEthiopian = function toEthiopian(dateArray) {
   var ethiopianYear = year - 8;
 
   // if ethiopian leap year pagumain has 6 days
-
   if (ethiopianYear % 4 === 3) {
     ethiopianMonths[10] = 6;
   }
@@ -162,8 +158,8 @@ var toEthiopian = exports.toEthiopian = function toEthiopian(dateArray) {
   }
 
   // calculate month and date incremently
-  var m = undefined;
-  var ethiopianDate = undefined;
+  var m = void 0;
+  var ethiopianDate = void 0;
   for (m = 1; m < ethiopianMonths.length; m++) {
     if (until <= ethiopianMonths[m]) {
       ethiopianDate = m === 1 || ethiopianMonths[m] === 0 ? until + (30 - tahissas) : until;
@@ -173,14 +169,13 @@ var toEthiopian = exports.toEthiopian = function toEthiopian(dateArray) {
     }
   }
 
-  // if m > 4, we're already on next Ethiopian year
-  if (m > 4) {
+  // if m > 10, we're already on next Ethiopian year
+  if (m > 10) {
     ethiopianYear += 1;
   }
 
   // Ethiopian months ordered according to Gregorian
   var order = [0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4];
   var ethiopianMonth = order[m];
-  ethiopianDate = Math.floor(ethiopianDate);
   return [ethiopianYear, ethiopianMonth, ethiopianDate];
 };
